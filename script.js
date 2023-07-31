@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Add click event listeners to each box
     document.getElementById("box1").addEventListener("click", function () {
-        selectBox("box1", "chart1.html");
         displayChart1();
+        selectBox("box1", "chart1.html");
     });
 
     document.getElementById("box2").addEventListener("click", function () {
-        selectBox("box2", "chart2.html");
         displayChart2();
+        selectBox("box2", "chart2.html");
     });
 
     document.getElementById("box3").addEventListener("click", function () {
-        selectBox("box3", "chart3.html");
         displayChart3();
+        selectBox("box3", "chart3.html");
     });
 });
 
@@ -59,6 +59,10 @@ function handleMouseOut(d) {
 function displayChart1() {
     chartContainer = document.getElementById("chartContainer");
     chartContainer.innerHTML = ""; 
+    
+    vizContainer = document.getElementById("visualization-container");
+    vizContainer.innerHTML = '<div id="displayArea"></div>'; 
+
     wnbaData = [
         {name: "Breanna Stewart",reboundsPerGame: 7.6,assistsPerGame: 2.9,pointsPerGame: 21.8, salary: 228094},
         {name: "Kelsey Plum",reboundsPerGame: 2.7,assistsPerGame: 5.1,pointsPerGame: 20.2, salary: 180250},
@@ -113,8 +117,8 @@ function displayChart1() {
         {name: "Deandre Ayton",reboundsPerGame: 10,assistsPerGame: 1.7,pointsPerGame: 18,salary: 32459438},
     ];
 
-    const svgWidth = 800;
-    const svgHeight = 1000;
+    const svgWidth = 600;
+    const svgHeight = 700;
     const margin = { top: 10, right: 30, bottom: 90, left: 50 };
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
@@ -126,7 +130,7 @@ function displayChart1() {
         { value: "assistsPerGame", text: "Assists per Game" }
     ];
     selectedValue = "pointsPerGame";
-    const dropdownMenu = d3.select("#displayArea")
+    const dropdownMenu = d3.select("#visualization-container")
         .append("select")
         .attr("id", "dropdownMenu");
     
@@ -244,7 +248,7 @@ function displayChart1() {
             .attr("y", d => yScale(d[selectedValue]) + 30)
             .attr("text-anchor", "middle")
             .attr("fill", "white")
-            .style("font-size", salaryTextSize) 
+            .style("font-size", "8px") 
             .text(d => `$${d.salary.toLocaleString()}`);
 
 
@@ -286,8 +290,11 @@ function displayChart2() {
     chartContainer = document.getElementById("chartContainer");
     chartContainer.innerHTML = ""; 
     
-    const svgWidth = 1600;
-    const svgHeight = 1000;
+    vizContainer = document.getElementById("visualization-container");
+    vizContainer.innerHTML = '<div id="displayArea"></div>'; 
+    
+    const svgWidth = 1000;
+    const svgHeight = 700;
     const margin = { top: 30, right: 110, bottom: 50, left: 110 };
 
     const svg = d3.select("#chartContainer")
@@ -304,7 +311,7 @@ function displayChart2() {
         { league: "MLB", revenuePerPlayer: 14400000, avgPlayerSalary: 4900000 },
     ];
 
-    const checkboxContainer = d3.select("#displayArea")
+    const checkboxContainer = d3.select("#visualization-container")
         .append("div")
         .attr("class", "checkbox-container");
 
@@ -437,8 +444,11 @@ function displayChart3() {
     chartContainer = document.getElementById("chartContainer");
     chartContainer.innerHTML = ""; 
     
-    const svgWidth = 1600;
-    const svgHeight = 1000;
+    vizContainer = document.getElementById("visualization-container");
+    vizContainer.innerHTML = '<div id="displayArea"></div>'; 
+
+    const svgWidth = 1000;
+    const svgHeight = 700;
     const margin = { top: 30, right: 110, bottom: 50, left: 110 };
 
     const svg = d3.select("#chartContainer")
@@ -455,7 +465,7 @@ function displayChart3() {
         { league: "MLB", annualCableViewership:  1419000, avgPlayerSalary: 4900000 },
     ];
 
-    const checkboxContainer = d3.select("#displayArea")
+    const checkboxContainer = d3.select("#visualization-container")
         .append("div")
         .attr("class", "checkbox-container");
 
